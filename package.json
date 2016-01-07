@@ -1,0 +1,19 @@
+{
+  "name": "nodebot",
+  "version": "1.0.0",
+  "description": "An IRC bot written in JavaScript using Node.",
+  "main": "bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.cerner.com/nh028808/nodebot.git"
+  },
+  "author": "Nathan Hawkins",
+  "devDependencies": {
+    "http": "~0.0.0",
+    "https": "~1.0.0",
+    "irc": "~0.4.0"
+  }
+}
