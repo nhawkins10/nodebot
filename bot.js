@@ -40,6 +40,9 @@ bot.addListener("message", function(from, to, text, message) {
             case "stock":
                 showStock(responseTarget, command.args);
                 break;
+            case "ascii":
+                showAscii(responseTarget, command.args);
+                break;
             case "help":
                 showHelp(responseTarget, command.args);
                 break;
@@ -148,6 +151,14 @@ function showStock(responseTarget, args) {
     });
 }
 
+function showAscii(responseTarget, args) {
+    var ascii = require('asciify');
+    ascii(args.join(" "), function(err, res){ 
+        console.log(res); 
+        bot.say(responseTarget, res);
+    });
+}
+
 function showHelp(responseTarget, args) {
     if (args) {
         switch(args[0]) {
@@ -160,10 +171,13 @@ function showHelp(responseTarget, args) {
             case "stock":
                 bot.say(responseTarget, "Usage: " + config.botName + " stock <symbol>, gets current price for the given stock");
                 break;
+            case "ascii":
+                bot.say(responseTarget, "Usage: " + config.botName + " ascii <text>, print the given text as ascii art");
+                break;
             default:
                 bot.say(responseTarget, "No help available on that command.");
         }
     } else {
-        bot.say(responseTarget, "Available Commands:\n\tweather\n\ttraffic\n\tstock\n\thelp");
+        bot.say(responseTarget, "Available Commands:\n\tweather\n\ttraffic\n\tstock\n\tascii\n\thelp");
     }
 }
