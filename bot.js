@@ -43,6 +43,9 @@ bot.addListener("message", function(from, to, text, message) {
             case "ascii":
                 showAscii(responseTarget, command.args);
                 break;
+            case "insult":
+                showInsult(responseTarget, command.args);
+                break;
             case "help":
                 showHelp(responseTarget, command.args);
                 break;
@@ -159,6 +162,24 @@ function showAscii(responseTarget, args) {
     });
 }
 
+function showInsult(responseTarget, args) {
+    if (!args) {
+        bot.say(responseTarget, "You have to give me a user to insult.");
+        showHelp(responseTarget, ["insult"]);
+        return;
+    }
+    var phrases = [['apish', 'artless', 'beslubbering', 'caluminating', 'cautelous'],
+        ['bald-pated', 'barren-spirited', 'beast-eating', 'beef-witted', 'boiled-brains'], 
+        ['abomination', 'arch-villain', 'baggage', 'block-head', 'braggart']];
+     var phrase = {
+        a: phrases[0][Math.floor(Math.random() * phrases[0].length)],
+        b: phrases[1][Math.floor(Math.random() * phrases[1].length)],
+        c: phrases[2][Math.floor(Math.random() * phrases[2].length)]
+    };
+        
+        bot.say(responseTarget, args[0] + ' you\'re a ' + phrase.a + ' ' + phrase.b + ' ' + phrase.c);
+}
+
 function showHelp(responseTarget, args) {
     if (args) {
         switch(args[0]) {
@@ -174,10 +195,13 @@ function showHelp(responseTarget, args) {
             case "ascii":
                 bot.say(responseTarget, "Usage: " + config.botName + " ascii <text>, print the given text as ascii art");
                 break;
+            case "insult":
+                bot.say(responseTarget, "Usage: " + config.botName + " insult <user>, insult the given user with a Shakespearean insult");
+                break;
             default:
                 bot.say(responseTarget, "No help available on that command.");
         }
     } else {
-        bot.say(responseTarget, "Available Commands:\n\tweather\n\ttraffic\n\tstock\n\tascii\n\thelp");
+        bot.say(responseTarget, "Available Commands:\n\tweather\n\ttraffic\n\tstock\n\tascii\n\tinsult\n\thelp");
     }
 }
